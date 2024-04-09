@@ -114,74 +114,23 @@ internal class Database
         sqlServerPripojeni.Close();
         sqlServerPripojeni.ConnectionString = pripojovaciRetezec;
         sqlServerPripojeni.Open();
-        Console.WriteLine("changed succesfully");
     }
 
-	/*public void VytvoritDatabazi()
-    {
-		string skript = NacistSkript(Skripty.VytvoritDatabazi);
-		using SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
-        string absolutniCesta = Path.GetFullPath(cestaDatabaze);
-        prikaz.Parameters.AddWithValue("DbPath", absolutniCesta);
-        _ = prikaz.ExecuteNonQuery();
-	}*/
-
-	public string VytvoritDatabazi()
-	{//commonapplicationdata Xcommonprogramfiles
-        string appdata = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-
-		string dataFileFolderPath = Path.GetFullPath(
-			Path.Combine(appdata, "EvidenceKlicu", "Data")
-			);
-		string logFileFolderPath = Path.GetFullPath(
-			Path.Combine(appdata, "EvidenceKlicu", "Log")
-			);
-        string dataFilePath = Path.Combine(dataFileFolderPath, "EvidenceKlicu.mdf");
-        string logFilePath = Path.Combine(logFileFolderPath, "EvidenceKlicu.ldf");
-        string skript = $@"
-        CREATE DATABASE EvidenceKlicu
-        ON --PRIMARY
-        (
-            NAME = 'EvidenceKlicu_data',
-            FILENAME = '{dataFilePath}',
-            SIZE = 8MB,
-            MAXSIZE = UNLIMITED,
-            FILEGROWTH = 8MB
-        )
-        LOG ON
-        (
-            NAME = 'EvidenceKlicu_log',
-            FILENAME = '{logFilePath}',
-            SIZE = 8MB,
-            MAXSIZE = 32MB,
-            FILEGROWTH = 8MB
-        );
-    ";
-        if(!Directory.Exists(dataFileFolderPath))
-        {
-            Directory.CreateDirectory(dataFileFolderPath);
-        }
-        if(!Directory.Exists(logFileFolderPath))
-        {
-            Directory.CreateDirectory(logFileFolderPath);
-        }
-
-
+	public void VytvoritDatabazi()
+	{
+        string skript = NacistSkript(Skripty.VytvoritDatabazi);
 		using SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
 		_ = prikaz.ExecuteNonQuery();
-        Console.WriteLine("success");
-        return dataFilePath;
-
 	}
 
 	#endregion
 
-	public IEnumerable<Klic> ZiskatKlice()
+	public IEnumerable<Klic> ZiskatVsechnyKlice()
     {
         throw new NotImplementedException();
     }
 
-	public IEnumerable<Zamestnanec> ZiskatZamestnance()
+	public IEnumerable<Zamestnanec> ZiskatVsechnyZamestnance()
     {
         throw new NotImplementedException();
     }
@@ -197,23 +146,26 @@ internal class Database
     }
 
 
-    public void PridatNovehoZamestnance()
+    public void PridatNovehoZamestnance(Zamestnanec zamestnanec)
     {
-        //instance tridy Zamestnanec
-        //naplneni instance tridy hodnotami z Okna vytvorit zamestnance
-        string textPrikazu = "INSERT INTO Zamestnanci()" +
-                             "VALUES()";
-        // zbytečné -> SqlConnection connection = new SqlConnection(PripojovaciRetezec);
-        
-        SqlCommand prikaz = new SqlCommand(textPrikazu, sqlServerPripojeni);
-        //prikaz.Parameters.AddWithValue();
-        //vsechny parametry
-
-        prikaz.ExecuteNonQuery();
+        string skript = NacistSkript(Skripty.PridatZamestnance);
+        using SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
+        prikaz.Parameters.AddWithValue("Jmeno", zamestnanec.Jmeno);
+		prikaz.Parameters.AddWithValue("Prijmeni", zamestnanec.Prijmeni);
+		prikaz.Parameters.AddWithValue("Zkratka", zamestnanec.Zkratka);
+        SqlDataReader reader = prikaz.ExecuteReader();
+        int id = (int)reader[0];
+        zamestnanec.Id = id;
     }
 
     public void UpravitZamestnance()
     {
+        /*
+            dodělat
+        */
+        using SqlCommand cmd = new SqlCommand("SELECT * FROM Zamestnanci", sqlServerPripojeni);
+        var reader = cmd.ExecuteReader();
+        reader.Close();
         //instance tridy Zamestnanec
         //naplneni instance tridy hodnotami z Okna upravit zamestnance
         string textPrikazu = "UPDATE Zamestnanci" +
@@ -228,10 +180,26 @@ internal class Database
 
     public void OdstranitZamestnance()
     {
-        string textPrikazu = "DELETE FROM Zamestnanci WHERE condition";
+		/*
+            dodělat
+        */
+		string textPrikazu = "DELETE FROM Zamestnanci WHERE condition";
         SqlCommand prikaz = new SqlCommand(textPrikazu, sqlServerPripojeni);
         prikaz.ExecuteNonQuery();
     }
 
+    public void PridatNovyKlic(Klic klic)
+	{
+		throw new NotImplementedException();
+	}
 
+	public void UpravitKlic(Klic klic)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void OdstranitKlic(Klic klci)
+	{
+		throw new NotImplementedException();
+	}
 }

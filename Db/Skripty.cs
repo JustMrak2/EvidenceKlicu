@@ -17,5 +17,5 @@ internal static class Skripty
 	public const string VytvoritTabulkuZamestnanci = "CREATE TABLE Zamestnanci.sql";
 	public const string VytvoritTabulkuZaznamyVypujceni = "CREATE TABLE ZaznamyVypujceni.sql";
 	public const string VytvoritDatabazi = "CREATE DATABASE EvidenceKlicu.sql";
-
+	public const string PridatZamestnance = "INSERT Zamestnanec.sql";
 }
