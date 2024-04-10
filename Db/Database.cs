@@ -1,11 +1,5 @@
 ﻿using EvidenceKlicu.Modely;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Data.Common;
 
 namespace EvidenceKlicu.Db;
 
@@ -173,7 +167,8 @@ public class Database
     {
 		string skript = NacistSkript(Skripty.OdstranitZamestnance);		
         SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
-        prikaz.ExecuteNonQuery();
+		prikaz.Parameters.AddWithValue(skript, zamestnanec.Id);
+		prikaz.ExecuteNonQuery();
     }
 
     public void PridatNovyKlic(Klic klic)

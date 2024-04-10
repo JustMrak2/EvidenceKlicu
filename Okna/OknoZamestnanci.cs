@@ -1,14 +1,5 @@
 ﻿using EvidenceKlicu.Db;
 using EvidenceKlicu.Modely;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EvidenceKlicu.Okna;
 
@@ -63,7 +54,11 @@ public partial class OknoZamestnanci : Form
 
     private void Button_Click(object? sender, EventArgs e)
     {
-        new Okno((Zamestnanec)((Button)sender)?.DataContext).Show();
+        Button? button = (Button?)sender;
+        Zamestnanec? zamestnanec = (Zamestnanec?)button?.DataContext;
+        if (zamestnanec is null) return;
+
+        new Okno(zamestnanec).Show();
     }
 
     private void pridatZamestnance_Click(object sender, EventArgs e)
@@ -88,6 +83,6 @@ public partial class OknoZamestnanci : Form
 
     private void HlavniOkno_FormClosing(object? sender, FormClosingEventArgs e)
     {
-        db?.UzavritPripojeni();
+        database?.UzavritPripojeni();
     }
 }

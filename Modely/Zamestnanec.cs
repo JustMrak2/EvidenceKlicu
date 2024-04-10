@@ -22,11 +22,13 @@ public class Zamestnanec
 
     public static bool JsouUdajeSpravne(string jmeno, string prijmeni, string zkratka)
     {
-        if (string.IsNullOrEmpty(jmeno) &&
-        jmeno.Length <= 64 &&
-        string.IsNullOrEmpty(prijmeni) &&
-        prijmeni.Length <= 64 &&
-        string.IsNullOrEmpty(zkratka) &&
-        return Regex.IsMatch(zkratka, "^[A-Z]{2}$");
+#warning proč 64? změnit na konstantu; důkladněji rozepsat ověření
+        return 
+            string.IsNullOrEmpty(jmeno) &&
+            jmeno.Length <= 64 &&
+            string.IsNullOrEmpty(prijmeni) &&
+            prijmeni.Length <= 64 &&
+            string.IsNullOrEmpty(zkratka) &&
+            Regex.IsMatch(zkratka, "^[A-Z]{2}$");
     }
 }
