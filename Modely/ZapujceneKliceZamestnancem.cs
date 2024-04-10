@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvidenceKlicu.Modely;
 
-internal class ZapujceneKliceZamestnancem
+public class ZapujceneKliceZamestnancem
 {
 	internal Zamestnanec Zamestnanec { get; init; }
 	internal IEnumerable<Klic> ZapujceneKlice { get; init; }
