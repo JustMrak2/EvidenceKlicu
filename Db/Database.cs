@@ -9,7 +9,7 @@ using System.Data.Common;
 
 namespace EvidenceKlicu.Db;
 
-internal class Database
+public class Database
 {
     private static string cestaKeSkriptum = "../../../Db/Sql/";
     private static string cestaDatabaze = "../../../Db";
