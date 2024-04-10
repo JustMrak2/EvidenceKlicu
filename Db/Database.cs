@@ -158,33 +158,21 @@ public class Database
         zamestnanec.Id = id;
     }
 
-    public void UpravitZamestnance()
+    public void UpravitZamestnance(Zamestnanec zamestnanec)
     {
-        /*
-            dodělat
-        */
-        using SqlCommand cmd = new SqlCommand("SELECT * FROM Zamestnanci", sqlServerPripojeni);
-        var reader = cmd.ExecuteReader();
-        reader.Close();
-        //instance tridy Zamestnanec
-        //naplneni instance tridy hodnotami z Okna upravit zamestnance
-        string textPrikazu = "UPDATE Zamestnanci" +
-                             "SET sloupec = hodnota, sloupec = hodnota" +
-                             "WHERE condition";
-        SqlCommand prikaz = new SqlCommand(textPrikazu, sqlServerPripojeni);
-        //prikaz.Parameters.AddWithValue();
-        //vsechny parametry
+        string skript = NacistSkript(Skripty.UpravitZamestnance);
+        using SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
+        prikaz.Parameters.AddWithValue("Jmeno", zamestnanec.Jmeno);
+        prikaz.Parameters.AddWithValue("Prijmeni", zamestnanec.Prijmeni);
+        prikaz.Parameters.AddWithValue("Zkratka", zamestnanec.Zkratka);        
 
         prikaz.ExecuteNonQuery();
     }
 
-    public void OdstranitZamestnance()
+    public void OdstranitZamestnance(Zamestnanec zamestnanec)
     {
-		/*
-            dodělat
-        */
-		string textPrikazu = "DELETE FROM Zamestnanci WHERE condition";
-        SqlCommand prikaz = new SqlCommand(textPrikazu, sqlServerPripojeni);
+		string skript = NacistSkript(Skripty.OdstranitZamestnance);		
+        SqlCommand prikaz = new SqlCommand(skript, sqlServerPripojeni);
         prikaz.ExecuteNonQuery();
     }
 

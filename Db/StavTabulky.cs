@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvidenceKlicu.Db;
 
-internal enum StavTabulky
+public enum StavTabulky
 {
 	Neexistuje = 0,
 	NeplatneSloupce,

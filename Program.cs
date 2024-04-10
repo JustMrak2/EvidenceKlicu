@@ -1,3 +1,5 @@
+using EvidenceKlicu.Okna;
+
 namespace EvidenceKlicu
 {
 	internal static class Program
@@ -11,7 +13,7 @@ namespace EvidenceKlicu
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
-			Application.Run(new HlavniOkno());
+			Application.Run(new OknoZamestnanci(null));
 		}
 	}
 }

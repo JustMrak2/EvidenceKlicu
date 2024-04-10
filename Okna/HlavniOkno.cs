@@ -13,6 +13,7 @@ public partial class HlavniOkno : Form
 		Text = "Evidence klicu";
 		WindowState = FormWindowState.Maximized;
 
+		/*
 		string connectionString = "Server=localhost;Integrated security=True";//"Data Source=GPD-WIN-MAX-2-I;Initial Catalog=EvidenceKlicu;Integrated Security=True;Pooling=False";
 		db = new Database(connectionString);
 		if(!db.ExistujeDatabaze())
@@ -26,6 +27,7 @@ public partial class HlavniOkno : Form
 			db.OpravitTabulky();
 		}
 		FormClosing += HlavniOkno_FormClosing;
+		*/
 	}
 
 	private void HlavniOkno_FormClosing(object? sender, FormClosingEventArgs e)

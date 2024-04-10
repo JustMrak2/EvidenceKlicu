@@ -13,7 +13,6 @@ public class Zamestnanec
     public string Jmeno { get; set; }
     public string Prijmeni { get; set; }
     public string Zkratka { get; set; }
-
     public Zamestnanec(string jmeno, string prijmeni, string zkratka)
     {
         this.Jmeno = jmeno;
@@ -28,13 +27,6 @@ public class Zamestnanec
         string.IsNullOrEmpty(prijmeni) &&
         prijmeni.Length <= 64 &&
         string.IsNullOrEmpty(zkratka) &&
-        Regex.IsMatch(zkratka, "^[A-Z]{2}$"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Regex.IsMatch(zkratka, "^[A-Z]{2}$");
     }
 }
