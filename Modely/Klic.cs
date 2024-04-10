@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace EvidenceKlicu.Modely;
 
-internal class Klic
+public class Klic
 {
 }
