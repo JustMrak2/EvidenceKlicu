@@ -5,7 +5,7 @@ namespace EvidenceKlicu.Okna;
 
 public partial class OknoZamestnanci : Form
 {
-    Database database;
+    Database? database;
     public OknoZamestnanci()
     {
         InitializeComponent();
@@ -15,23 +15,20 @@ public partial class OknoZamestnanci : Form
     {
         InitializeComponent();
 
-        /*
         string connectionString = "Server=localhost;Integrated security=True";//"Data Source=GPD-WIN-MAX-2-I;Initial Catalog=EvidenceKlicu;Integrated Security=True;Pooling=False";
-		db = new Database(connectionString);
-		if(!db.ExistujeDatabaze())
+		database = new Database(connectionString);
+		if(!database.ExistujeDatabaze())
 		{
-			db.VytvoritDatabazi();
+			database.VytvoritDatabazi();
 		}
-		if(db.ZjistitStavTabulkyKlice() != StavTabulky.Vporadku
-			|| db.ZjistitStavTabulkyZamestnanci() != StavTabulky.Vporadku
-			|| db.ZjistitStavTabulkyZaznamyVypujceni() != StavTabulky.Vporadku)
+		if(database.ZjistitStavTabulkyKlice() != StavTabulky.Vporadku
+			|| database.ZjistitStavTabulkyZamestnanci() != StavTabulky.Vporadku
+			|| database.ZjistitStavTabulkyZaznamyVypujceni() != StavTabulky.Vporadku)
 		{
-			db.OpravitTabulky();
+			database.OpravitTabulky();
 		}
 		FormClosing += HlavniOkno_FormClosing;
-         */
-        this.database = database;
-
+        
         IEnumerable<Zamestnanec> zamestnanci = database.ZiskatVsechnyZamestnance();
         foreach (var item in zamestnanci)
         {
@@ -56,9 +53,9 @@ public partial class OknoZamestnanci : Form
     {
         Button? button = (Button?)sender;
         Zamestnanec? zamestnanec = (Zamestnanec?)button?.DataContext;
-        if (zamestnanec is null) return;
+        if (zamestnanec is null || database is null) return;
 
-        new Okno(zamestnanec).Show();
+        new OknoUpravitZamestnance(database, zamestnanec).Show();
     }
 
     private void pridatZamestnance_Click(object sender, EventArgs e)
