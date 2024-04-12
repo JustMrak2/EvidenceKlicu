@@ -29,8 +29,9 @@ public partial class OknoUpravitZamestnance : OknoVychoziZamestnanec
     {
         if (Zamestnanec.JsouUdajeSpravne(textBoxJmeno.Text, textBoxPrijmeni.Text, textBoxZkratka.Text))
         {
-            Zamestnanec novyZamestnanec = new Zamestnanec(textBoxJmeno.Text, textBoxPrijmeni.Text, textBoxZkratka.Text);
-            database.UpravitZamestnance(novyZamestnanec); // přiradit hodnoty (dodělat)
+            database.UpravitZamestnance(zamestnanec);
+            vymazatTextBoxy();
+            Close();
         }
         else
         {
@@ -40,6 +41,14 @@ public partial class OknoUpravitZamestnance : OknoVychoziZamestnanec
 
     private void buttonZavrit_Click(object sender, EventArgs e)
     {
+        vymazatTextBoxy();
         Close();
+    }
+
+    private void vymazatTextBoxy()
+    {
+        textBoxJmeno.Clear();
+        textBoxPrijmeni.Clear();
+        textBoxZkratka.Clear();
     }
 }
