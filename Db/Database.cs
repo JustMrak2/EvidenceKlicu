@@ -139,6 +139,15 @@ public class Database
         throw new NotImplementedException();
     }
 
+	public void ZapujcitKlic(Klic zapujcenyKlic, Zamestnanec pujcujiciZamestnanec)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void VratitKlic(Klic zapujcenyKlic, Zamestnanec vracejiciZamestnanec)
+	{
+		throw new NotImplementedException();
+	}
 
     public void PridatNovehoZamestnance(Zamestnanec zamestnanec)
     {
