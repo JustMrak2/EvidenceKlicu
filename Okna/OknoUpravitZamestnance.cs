@@ -29,8 +29,7 @@ public partial class OknoUpravitZamestnance : OknoVychoziZamestnanec
     {
         if (Zamestnanec.JsouUdajeSpravne(textBoxJmeno.Text, textBoxPrijmeni.Text, textBoxZkratka.Text))
         {
-            Zamestnanec novyZamestnanec = new Zamestnanec(textBoxJmeno.Text, textBoxPrijmeni.Text, textBoxZkratka.Text);
-            database.UpravitZamestnance(novyZamestnanec); // přiradit hodnoty (dodělat)
+            database.UpravitZamestnance(zamestnanec); // přiradit hodnoty (dodělat)
         }
         else
         {
