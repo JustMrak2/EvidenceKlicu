@@ -43,6 +43,8 @@ public partial class OknoPridatZamestnance : OknoVychoziZamestnanec
         {
             Zamestnanec novyZamestnanec = new Zamestnanec(textBoxJmeno.Text, textBoxPrijmeni.Text, textBoxZkratka.Text);
             database.PridatNovehoZamestnance(novyZamestnanec);
+            vymazatTextBoxy();
+            Close();
         }
         else
         {
@@ -52,6 +54,14 @@ public partial class OknoPridatZamestnance : OknoVychoziZamestnanec
 
     private void buttonZavrit_Click(object sender, EventArgs e)
     {
+        vymazatTextBoxy();
         Close();
+    }
+
+    private void vymazatTextBoxy()
+    {
+        textBoxJmeno.Clear();
+        textBoxPrijmeni.Clear();
+        textBoxZkratka.Clear();
     }
 }

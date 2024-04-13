@@ -65,7 +65,11 @@ public partial class OknoZamestnanci : Form
 
     private void upravitZamestnance_Click(object sender, EventArgs e)
     {
-
+        DialogResult result = MessageBox.Show("Chcete opravdu odstranit zaměstnance?", "Odstranění zaměstnance", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        if (result == DialogResult.Yes)
+        {
+            database.OdstranitZamestnance(zamestnanec); // nevím, jakým způsobem zjišťujeme vybraného zaměstnance
+        }
     }
 
     private void odstranitZamestnance_Click(object sender, EventArgs e)
